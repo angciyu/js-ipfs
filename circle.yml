@@ -13,3 +13,9 @@ dependencies:
     - sudo apt-get install --only-upgrade lsb-base
     - sudo dpkg -i google-chrome.deb
     - google-chrome --version
+
+test:
+  pre:
+    - npm run lint
+  post:
+    - npm run coverage -- --upload --providers coveralls
