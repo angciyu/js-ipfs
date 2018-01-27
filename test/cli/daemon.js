@@ -89,6 +89,7 @@ describe('daemon', () => {
   })
 
   it('should handle SIGINT gracefully', function (done) {
+    if (isWindows) { return done() }
     this.timeout(100 * 1000)
 
     testSignal(ipfs, 'SIGINT').then(() => {
@@ -97,14 +98,20 @@ describe('daemon', () => {
   })
 
   it('should handle SIGTERM gracefully', function (done) {
+    if (isWindows) { return done() }
+
     this.timeout(100 * 1000)
 
-    testSignal(ipfs, 'SIGTERM').then(() => {
-      checkLock(repoPath, done)
-    }).catch(done)
+    testSignal(ipfs, 'SIGTERM')
+      .then(() => {
+        checkLock(repoPath, done)
+      })
+      .catch(done)
   })
 
   it('gives error if user hasn\'t run init before', function (done) {
+    if (isWindows) { return done() }
+
     this.timeout(100 * 1000)
 
     const expectedError = 'no initialized ipfs repo found in ' + repoPath
