@@ -203,7 +203,7 @@ describe('bitswap', function () {
 
   describe('transfer a file between', function () {
     this.timeout(160 * 1000)
-    
+
     it('2 peers', (done) => {
       // TODO make this test more interesting (10Mb file)
       const file = Buffer.from(`I love IPFS <3 ${Math.random()}`)
