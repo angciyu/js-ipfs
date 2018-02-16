@@ -81,10 +81,17 @@ describe('daemon', () => {
         Gateway: '/ip4/127.0.0.1/tcp/0'
       }), '--json')
     }).then(() => {
-      return ipfs('daemon')
-    }).then((res) => {
-      expect(res).to.have.string('Daemon is ready')
-      done()
+      const proc = ipfs('daemon')
+      pull(
+        toPull(proc.stdout),
+        pull.collect((err, res) => {
+          expect(err).to.not.exist()
+          const data = res.toString()
+          expect(data).includes('Daemon is ready')
+          proc.kill()
+          done()
+        })
+      )
     }).catch((err) => done(err))
   })
 
@@ -110,9 +117,7 @@ describe('daemon', () => {
   })
 
   it('gives error if user hasn\'t run init before', function (done) {
-    if (isWindows) { return done() }
-
-    this.timeout(100 * 1000)
+    this.timeout(30 * 1000)
 
     const expectedError = 'no initialized ipfs repo found in ' + repoPath
 
