@@ -129,7 +129,10 @@ describe('bitswap', function () {
     })
   })
 
-  describe('transfer a block between', () => {
+  // TODO does not pass in browser because `createServer is not a function`
+  // https://github.com/libp2p/js-libp2p-websockets/issues/70
+  const skipInBrowser = isNode ? describe : describe.skip
+  skipInBrowser('transfer a block between', () => {
     it('2 peers', function (done) {
       this.timeout(160 * 1000)
 
@@ -201,7 +204,9 @@ describe('bitswap', function () {
     })
   })
 
-  describe('transfer a file between', function () {
+  // TODO does not pass in browser because `createServer is not a function`
+  // https://github.com/libp2p/js-libp2p-websockets/issues/70
+  skipInBrowser('transfer a file between', function () {
     this.timeout(160 * 1000)
 
     it('2 peers', (done) => {
