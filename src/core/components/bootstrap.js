@@ -36,7 +36,7 @@ module.exports = function bootstrap (self) {
       }
 
       if (multiaddr && !isValid(multiaddr)) {
-        return setImmediate(() => callback(new Error('Not valid multiaddr')))
+        return setImmediate(() => callback(new Error('Not a valid Multiaddr')))
       }
 
       self._repo.config.get((err, config) => {
@@ -65,7 +65,7 @@ module.exports = function bootstrap (self) {
         args = {all: false}
       }
       if (multiaddr && !isValid(multiaddr)) {
-        return setImmediate(() => callback(new Error('Not valid multiaddr')))
+        return setImmediate(() => callback(new Error('Not a valid Multiaddr')))
       }
 
       self._repo.config.get((err, config) => {

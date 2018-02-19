@@ -118,7 +118,7 @@ describe('bootstrap', () => {
 
   it('fails if passing in a invalid multiaddr', (done) => {
     node.bootstrap.add('/am/invalid/multiaddr', (err, res) => {
-      expect(err).to.match(/not a valid multiaddr/)
+      expect(err).to.match(/not a valid multiaddr/i)
       expect(res).to.not.exist()
       done()
     })
