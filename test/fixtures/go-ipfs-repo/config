@@ -13,7 +13,10 @@
     "NoSync":false
   },
   "Addresses":{  
-    "Swarm":[],
+    "Swarm":[  
+      "/ip4/127.0.0.1/tcp/9999",
+      "/ip4/127.0.0.1/tcp/9990/ws"
+    ],
     "API":"/ip4/127.0.0.1/tcp/6001",
     "Gateway":"/ip4/127.0.0.1/tcp/0"
   },
