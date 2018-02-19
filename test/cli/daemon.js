@@ -95,8 +95,9 @@ describe('daemon', () => {
     }).catch((err) => done(err))
   })
 
-  it('should handle SIGINT gracefully', function (done) {
-    if (isWindows) { return done() }
+  const skipOnWindows = isWindows ? it.skip : it
+
+  skipOnWindows('should handle SIGINT gracefully', function (done) {
     this.timeout(100 * 1000)
 
     testSignal(ipfs, 'SIGINT').then(() => {
@@ -104,9 +105,7 @@ describe('daemon', () => {
     }).catch(done)
   })
 
-  it('should handle SIGTERM gracefully', function (done) {
-    if (isWindows) { return done() }
-
+  skipOnWindows('should handle SIGTERM gracefully', function (done) {
     this.timeout(100 * 1000)
 
     testSignal(ipfs, 'SIGTERM')
