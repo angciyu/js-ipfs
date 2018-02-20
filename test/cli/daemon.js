@@ -28,9 +28,13 @@ const checkLock = (repo, cb) => {
 }
 
 function testSignal (ipfs, sig) {
-  let proc = null
   return ipfs('init').then(() => {
-    proc = ipfs('daemon')
+    return ipfs('config', 'Addresses', JSON.stringify({
+      API: '/ip4/127.0.0.1/tcp/0',
+      Gateway: '/ip4/127.0.0.1/tcp/0'
+    }), '--json')
+  }).then(() => {
+    const proc = ipfs('daemon')
     return new Promise((resolve, reject) => {
       pull(
         toPull(proc.stdout),
